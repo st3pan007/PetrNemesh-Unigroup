@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniGroup | Rekonstrukce nové generace</title>
+    <meta name="description" content="UniGroup s.r.o. - Prémiové rekonstrukce s garancí kvality. Koordinujeme celý projekt od A do Z.">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Inter:wght@300;400;600;800&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Změna barevné palety - bod 1 */
+            --primary: #1A2332;
+            --primary-dark: #141922;
+            --secondary: #F7F3F0;
+            --accent: #3A7CA5; /* Nová modrá akcentní barva */
+            --accent-glow: #5a9ac8; /* Světlejší odstín pro efekty */
+            --dark: #1A2332;
+            --dark-lighter: #2C3E50;
+            --light: #F7F3F0;
+            --white: #ffffff;
+            --text-dark: #1A2332;
+            --text-light: #4A5568;
+            --bg-light: #FAFBFC;
+            --gradient-1: linear-gradient(135deg, #3A7CA5 0%, #5a9ac8 100%); /* Nový gradient */
+            --gradient-2: linear-gradient(135deg, #1A2332 0%, #2C3E50 100%);
+            --gradient-3: linear-gradient(135deg, #4A5568 0%, #64748B 100%);
+            --gradient-dark: linear-gradient(135deg, #1A2332 0%, #2C3E50 50%, #394B5D 100%);
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --neon-glow: 0 0 20px rgba(58, 124, 165, 0.8); /* Upraveno pro novou barvu */
+            --text-glow: 0 0 30px rgba(58, 124, 165, 0.5); /* Upraveno pro novou barvu */
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --shadow-hover: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--white);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            cursor: default;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-light);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient-1);
+            border-radius: 10px;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            z-index: 100;
+            transition: all 0.5s ease;
+            background: rgba(255,255,255,0.95);
+        }
+
+        .nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            filter: brightness(1.2);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: var(--gradient-1);
+            transform: translateX(-50%);
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover::before {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--gradient-1);
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-cta::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .nav-cta:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(58, 124, 165, 0.4); /* Upraveno pro novou barvu */
+        }
+
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .mobile-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-dark);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section - Vylepšení bod 3 */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+            /* Nahrazení gradientu obrázkem s překrytím */
+            background: linear-gradient(rgba(26, 35, 50, 0.7), rgba(26, 35, 50, 0.7)), url('https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') no-repeat center center/cover;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 1000px;
+            padding: 0 2rem;
+            margin: 0 auto;
+            color: white;
+        }
+
+        .hero-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .hero-title span {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(var(--text-glow));
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 3rem;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        /* About Company Section - Vylepšení bod 3 */
+        .about-company {
+            padding: 6rem 2rem;
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-company-content {
+            display: grid;
+            grid-template-columns: 1fr 0.8fr; /* Upraven poměr pro lepší vzhled obrázku */
+            gap: 4rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-company-text h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .about-company-text h2 i {
+            color: var(--accent);
+            margin-right: 1rem;
+        }
+
+        .about-company-text .lead {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-company-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-light);
+            margin-bottom: 1.2rem;
+        }
+
+        .company-benefits {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .benefit-box {
+            background: var(--bg-light);
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .benefit-box:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 25px rgba(58, 124, 165, 0.1); /* Upraveno pro novou barvu */
+        }
+
+        .benefit-box i {
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        .benefit-box span {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .about-company-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .about-company-visual img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            max-height: 450px;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 6rem 2rem;
+            background: var(--bg-light);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .services .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .services-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .service-categories {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            padding: 0.75rem 2rem;
+            background: var(--white);
+            border: 1px solid rgba(0,0,0,0.1);
+            color: var(--text-dark);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .category-btn.active {
+            background: var(--gradient-1);
+            border-color: transparent;
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(58, 124, 165, 0.3); /* Upraveno pro novou barvu */
+            color: white;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .service-card {
+            background: white;
+            border: 1px solid rgba(0,0,0,0.05);
+            padding: 2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            /* Vylepšení pro JavaScript filtrování - bod 4 */
+            transition: transform 0.4s ease, opacity 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(58, 124, 165, 0.1), transparent);
+            transition: all 0.5s ease;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(58, 124, 165, 0.2); /* Upraveno pro novou barvu */
+            border-color: var(--accent);
+        }
+
+        .service-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-1);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .service-card h3 {
+            color: var(--text-dark);
+            font-size: 1.3rem;
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .service-card ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 1rem;
+        }
+
+        .service-card ul li {
+            padding: 0.5rem 0;
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .service-card ul li i {
+            color: var(--accent);
+            margin-right: 0.5rem;
+        }
+
+        /* Process Section - Premium */
+        .process {
+            padding: 6rem 2rem;
+            background: var(--gradient-dark);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .process .section-header {
+            text-align: center;
+        }
+
+        .process .section-header h2,
+        .process .section-header p {
+            color: white;
+        }
+
+        .process-flow {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 4rem auto 0;
+            position: relative;
+        }
+
+        .process-line {
+            position: absolute;
+            top: 40px;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                var(--accent) 20%, 
+                var(--accent) 80%, 
+                transparent 100%);
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .process-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+            transition: all 0.4s ease;
+            transform-style: preserve-3d;
+        }
+
+        .process-card:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 30px 60px rgba(58, 124, 165, 0.3); /* Upraveno pro novou barvu */
+        }
+
+        .process-number {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(58, 124, 165, 0.5); /* Upraveno pro novou barvu */
+            z-index: 2;
+        }
+
+        .process-number span {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: white;
+        }
+
+        .number-glow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-1);
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: pulse-glow 2s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.2; }
+        }
+
+        .process-content {
+            padding-top: 3rem;
+            text-align: center;
+        }
+
+        .process-content h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .process-content p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .process-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto;
+            background: rgba(58, 124, 165, 0.1);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .process-icon i {
+            font-size: 1.8rem;
+            color: var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .process-card:hover .process-icon {
+            background: rgba(58, 124, 165, 0.2);
+            transform: scale(1.1);
+        }
+
+        .process-card:hover .process-icon i {
+            transform: rotate(10deg);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 6rem 2rem;
+            background: var(--white);
+        }
+
+        .contact .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: stretch;
+        }
+
+        .contact-box {
+            background: var(--bg-light);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .contact-box h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateX(10px);
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+        }
+
+        .contact-icon i {
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+
+        .contact-item:hover .contact-icon {
+            background: var(--gradient-1);
+            transform: scale(1.1);
+        }
+
+        .contact-item:hover .contact-icon i {
+            color: white;
+        }
+
+        .contact-info h4 {
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-info p {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .contact-info a {
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: var(--accent);
+        }
+
+        .contact-map {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .map-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            min-height: 500px;
+        }
+
+        .map-wrapper iframe {
+            border-radius: 20px;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 4rem 2rem;
+            background: var(--gradient-1);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            to { transform: rotate(360deg); }
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 0.75rem;
+            font-weight: 800;
+            color: white;
+        }
+
+        .cta-content p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: white;
+            opacity: 0.9;
+        }
+
+        .cta-form {
+            display: flex;
+            gap: 1rem;
+            max-width: 400px;
+            margin: 1.5rem auto;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .cta-input {
+            flex: 1;
+            padding: 0.75rem 1.25rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            background: rgba(255, 255, 255, 0.9);
+            min-width: 200px;
+        }
+
+        .cta-submit {
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 50px;
+            background: var(--dark);
+            color: white;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cta-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-phone {
+            margin-top: 1.5rem;
+            font-size: 1rem;
+            color: white;
+        }
+
+        .cta-phone i {
+            margin-right: 0.5rem;
+        }
+
+        .cta-phone strong {
+            font-size: 1.2rem;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 4rem 2rem 2rem;
+            background: var(--dark);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links h4 {
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .footer-links li i {
+            margin-right: 0.5rem;
+            color: var(--accent);
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            font-size: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .footer-social a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: all 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* General classes */
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+
+        /* Responsive - Vylepšení bod 5 */
+        @media (max-width: 1024px) {
+            .process-flow {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 4rem 2rem;
+            }
+            .process-line { display: none; }
+            .about-company-content { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 0;
+                flex-direction: column;
+                background: var(--white);
+                width: 100%;
+                height: 100vh;
+                align-items: center;
+                justify-content: center;
+                transition: 0.3s;
+                padding: 2rem;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            /* Vylepšení CTA tlačítka v mobilním menu */
+            .nav-menu li:last-child {
+                margin-top: auto;
+                padding-top: 2rem;
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-menu .nav-cta {
+                display: block;
+                width: 90%;
+                margin: 0 auto;
+            }
+
+            .mobile-toggle {
+                display: flex;
+                z-index: 101;
+            }
+
+            .mobile-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .mobile-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .mobile-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
+            }
+
+            .hero-content {
+                padding: 0 1rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            /* Vylepšení sekce Kontakt */
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .map-wrapper {
+                min-height: 400px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .process-flow {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+        }
+
+        /* Animation on scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav" id="nav">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-drafting-compass"></i>
+                UniGroup
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#hero" class="nav-link">Domů</a></li>
+                <li><a href="#about-company" class="nav-link">O nás</a></li>
+                <li><a href="#services" class="nav-link">Služby</a></li>
+                <li><a href="#process" class="nav-link">Jak to funguje</a></li>
+                <li><a href="#contact" class="nav-link">Kontakt</a></li>
+                <li><a href="#cta" class="nav-cta">Začít projekt</a></li>
+            </ul>
+            <div class="mobile-toggle" id="mobileToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section id="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                Rekonstrukce<br>
+                <span>nové generace</span>
+            </h1>
+            <p class="hero-subtitle">
+                Jeden partner. Všechny profese. Garantovaný výsledek.
+            </p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn btn-primary">
+                    <i class="fas fa-rocket"></i>
+                    Začít projekt
+                </a>
+                <a href="#process" class="btn btn-secondary">
+                    <i class="fas fa-play"></i>
+                    Jak to funguje
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-company" id="about-company">
+        <div class="container">
+            <div class="about-company-content">
+                <div class="about-company-text fade-in">
+                    <h2>
+                        <i class="fas fa-wrench"></i>
+                        UniGroup s.r.o. – Koordinace na klíč
+                    </h2>
+                    <p class="lead">
+                        Kompletní rekonstrukce bytů, rodinných domů, kanceláří i skladových prostor.
+                    </p>
+                    <p>
+                        Hledáte spolehlivého partnera pro rekonstrukci vašeho bydlení či firemních prostor? 
+                        UniGroup s.r.o. zajišťuje kompletní koordinaci stavebních prací – od první 
+                        konzultace až po předání hotového díla.
+                    </p>
+                    <p>
+                        Díky síti ověřených řemeslníků a odborníků zajistíme hladký průběh rekonstrukce 
+                        bez starostí. Zodpovídáme za kvalitu, dodržení termínů i rozpočtu.
+                    </p>
+                    
+                    <div class="company-benefits">
+                        <div class="benefit-box">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Garance kvality</span>
+                        </div>
+                        <div class="benefit-box">
+                            <i class="fas fa-clock"></i>
+                            <span>Dodržení termínů</span>
+                        </div>
+                        <div class="benefit-box">
+                            <i class="fas fa-calculator"></i>
+                            <span>Fixní rozpočet</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-company-visual fade-in">
+                    <img src="https://images.pexels.com/photos/834892/pexels-photo-834892.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Tým profesionálů při práci">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <div class="services-container">
+            <div class="section-header">
+                <h2 class="section-title">Kompletní služby pod jednou střechou</h2>
+                <p class="section-subtitle">Specializujeme se na vše, co váš projekt potřebuje.</p>
+            </div>
+
+            <div class="service-categories">
+                <button class="category-btn active" onclick="filterServices('all')">Všechny služby</button>
+                <button class="category-btn" onclick="filterServices('technical')">Technické</button>
+                <button class="category-btn" onclick="filterServices('interior')">Interiéry</button>
+                <button class="category-btn" onclick="filterServices('exterior')">Exteriéry</button>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card" data-category="technical">
+                    <div class="service-header">
+                        <div class="service-icon">
+                            <i class="fas fa-solar-panel"></i>
+                        </div>
+                        <h3>Fotovoltaika a dotace</h3>
+                    </div>
+                    <p>Zajistíme kompletní servis pro vaši energetickou nezávislost. Postaráme se o vše od zpracování žádosti o dotaci (Nová zelená úsporám) přes technickou dokumentaci až po profesionální montáž a zapojení vaší fotovoltaické elektrárny.</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i>Vyřízení dotace za vás</li>
+                        <li><i class="fas fa-check"></i>Profesionální instalace</li>
+                        <li><i class="fas fa-check"></i>Energetická soběstačnost</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card" data-category="technical">
+                    <div class="service-header">
+                        <div class="service-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3>Elektroinstalace 4.0</h3>
+                    </div>
+                    <p>Inteligentní elektroinstalace, LED systémy, smart home ready. Revize a certifikace v ceně.</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i>Chytrá domácnost</li>
+                        <li><i class="fas fa-check"></i>Úsporné LED osvětlení</li>
+                        <li><i class="fas fa-check"></i>Revize v ceně</li>
+                    </ul>
+                </div>
+
+                <div class="service-card" data-category="technical">
+                    <div class="service-header">
+                        <div class="service-icon">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <h3>Tepelná čerpadla</h3>
+                    </div>
+                    <p>Moderní vytápění s úsporou až 70%. Dotace až 150 000 Kč vyřídíme za vás.</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i>Vyřízení dotace</li>
+                        <li><i class="fas fa-check"></i>Úspora 70% nákladů</li>
+                        <li><i class="fas fa-check"></i>Záruka 10 let</li>
+                    </ul>
+                </div>
+
+                <div class="service-card" data-category="interior">
+                    <div class="service-header">
+                        <div class="service-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <h3>Premium interiéry</h3>
+                    </div>
+                    <p>Design na míru, 3D vizualizace, realizace. Váš sen se stane realitou.</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i>3D návrhy zdarma</li>
+                        <li><i class="fas fa-check"></i>Designér na projektu</li>
+                        <li><i class="fas fa-check"></i>Kompletní realizace</li>
+                    </ul>
+                </div>
+
+                <div class="service-card" data-category="interior">
+                    <div class="service-header">
+                        <div class="service-icon">
+                            <i class="fas fa-layer-group"></i>
+                        </div>
+                        <h3>Sádrokartony PROFI</h3>
+                    </div>
+                    <p>Certifikovaní specialisté Rigips. Příčky, podhledy, atypická řešení.</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i>Certifikace Rigips</li>
+                        <li><i class="fas fa-check"></i>Akustické řešení</li>
+                        <li><i class="fas fa-check"></i>Designové prvky</li>
+                    </ul>
+                </div>
+
+                <div class="service-card" data-category="exterior">
+                    <div class="service-header">
+                        <div class="service-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <h3>Fasády & zateplení</h3>
+                    </div>
+                    <p>Snížení nákladů na topení o 40%. Dotace Nová zelená úsporám.</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i>Úspora 40%</li>
+                        <li><i class="fas fa-check"></i>Dotace až 300 000 Kč</li>
+                        <li><i class="fas fa-check"></i>Záruka 10 let</li>
+                    </ul>
+                </div>
+
+                <div class="service-card" data-category="technical">
+                    <div class="service-header">
+                        <div class="service-icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <h3>Voda & kanalizace</h3>
+                    </div>
+                    <p>Kompletní rozvody, úsporné baterie, inteligentní systémy proti úniku vody.</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i>Stop únikům vody</li>
+                        <li><i class="fas fa-check"></i>Úsporné technologie</li>
+                        <li><i class="fas fa-check"></i>24/7 havarijní servis</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="#contact" class="btn btn-primary">
+                    <i class="fas fa-arrow-right"></i>
+                    Chci nezávaznou nabídku
+                </a>
+            </div>
+    </section>
+
+    <section class="process" id="process">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">Jak to funguje</h2>
+                <p class="section-subtitle">Transparentní proces od A do Z</p>
+            </div>
+            
+            <div class="process-flow">
+                <div class="process-line"></div>
+                
+                <div class="process-card fade-in" data-step="1">
+                    <div class="process-number">
+                        <span>01</span>
+                        <div class="number-glow"></div>
+                    </div>
+                    <div class="process-content">
+                        <h3>Nezávazná konzultace</h3>
+                        <p>Přijedeme, prohlédneme, poradíme. Zdarma a bez závazků. Rovnou řekneme, co je reálné.</p>
+                        <div class="process-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="process-card fade-in" data-step="2">
+                    <div class="process-number">
+                        <span>02</span>
+                        <div class="number-glow"></div>
+                    </div>
+                    <div class="process-content">
+                        <h3>3D návrh & fixní cena</h3>
+                        <p>Připravíme vizualizace, detailní rozpočet a časový plán. Cena se už nezmění.</p>
+                        <div class="process-icon">
+                            <i class="fas fa-cube"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="process-card fade-in" data-step="3">
+                    <div class="process-number">
+                        <span>03</span>
+                        <div class="number-glow"></div>
+                    </div>
+                    <div class="process-content">
+                        <h3>Realizace s garantem</h3>
+                        <p>Váš osobní koordinátor řídí celý projekt. Vy odpočíváte, my makáme.</p>
+                        <div class="process-icon">
+                            <i class="fas fa-hard-hat"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="process-card fade-in" data-step="4">
+                    <div class="process-number">
+                        <span>04</span>
+                        <div class="number-glow"></div>
+                    </div>
+                    <div class="process-content">
+                        <h3>Předání & 5 let klidu</h3>
+                        <p>Kontrola kvality, předání dokumentace, 5letá záruka na vše. Hotovo.</p>
+                        <div class="process-icon">
+                            <i class="fas fa-key"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">Kontakt</h2>
+                <p class="section-subtitle">Máte dotaz nebo zájem o naše služby? Neváhejte nás kontaktovat.</p>
+            </div>
+            
+            <div class="contact-wrapper">
+                <div class="contact-box fade-in">
+                    <h3>Spojme se</h3>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-info">
+                            <h4>ADRESA</h4>
+                            <p>Karlovo náměstí 557/30<br>Praha 2, 120 00</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-info">
+                            <h4>E-MAIL</h4>
+                            <p><a href="mailto:unigroup@post.cz">unigroup@post.cz</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-info">
+                            <h4>TELEFON</h4>
+                            <p><a href="tel:+420775710770">+420 775 710 770</a></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-map fade-in">
+                    <div class="map-wrapper">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2560.208155431475!2d14.417278977011933!3d50.08092281404016!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470b94f0360a7587%3A0x934a355648b26149!2sKarlovo%20n%C3%A1m%C4%9Bst%C3%AD!5e0!3m2!1sen!2scz!4v1695568453523!5m2!1sen!2scz"
+                            width="100%" 
+                            height="100%" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta" id="cta">
+        <div class="cta-content">
+            <h2>Připraveni změnit váš prostor?</h2>
+            <p>Nechte nám kontakt. Ozveme se do 24 hodin.</p>
+
+            <form class="cta-form" onsubmit="handleSubmit(event)">
+                <input type="tel" class="cta-input" placeholder="Váš telefon" required>
+                <button type="submit" class="cta-submit">
+                    <i class="fas fa-paper-plane"></i> Odeslat
+                </button>
+            </form>
+
+            <p class="cta-phone">
+                <i class="fas fa-phone"></i> Nebo volejte: <strong>775 710 770</strong>
+            </p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>UniGroup</h3>
+                <p>Váš partner pro prémiové rekonstrukce</p>
+                <p>
+                    IČO: 09904182<br>
+                    DIČ: CZ09904182
+                </p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Služby</h4>
+                <ul>
+                    <li><a href="#services">Fotovoltaika</a></li>
+                    <li><a href="#services">Tepelná čerpadla</a></li>
+                    <li><a href="#services">Elektroinstalace</a></li>
+                    <li><a href="#services">Rekonstrukce interiérů</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h4>Kontakt</h4>
+                <ul>
+                    <li><i class="fas fa-phone"></i> 775 710 770</li>
+                    <li><i class="fas fa-envelope"></i> unigroup@post.cz</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Karlovo náměstí 557/30</li>
+                    <li style="padding-left: 1.5rem;">Praha 2, 120 00</li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h4>Sledujte nás</h4>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 UniGroup s.r.o. | Všechna práva vyhrazena</p>           
+        </div>
+    </footer>
+
+    <script>
+        // Navigation
+        const nav = document.getElementById('nav');
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        mobileToggle.addEventListener('click', () => {
+            mobileToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.nav-link, .nav-cta').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Vylepšené filtrování služeb - Bod 4
+        function filterServices(category) {
+            const buttons = document.querySelectorAll('.category-btn');
+            const cards = document.querySelectorAll('.service-card');
+            const transitionDuration = 400; // musí odpovídat CSS transition
+
+            // Update active button
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            cards.forEach(card => {
+                const isVisible = category === 'all' || card.dataset.category === category;
+                
+                if (isVisible) {
+                    // Show card
+                    if (card.style.display === 'none') {
+                        card.style.opacity = '0';
+                        card.style.transform = 'scale(0.95)';
+                        card.style.display = 'block';
+
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'scale(1)';
+                        }, 10);
+                    }
+                } else {
+                    // Hide card
+                    if (card.style.display !== 'none') {
+                        card.style.opacity = '0';
+                        card.style.transform = 'scale(0.95)';
+
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, transitionDuration);
+                    }
+                }
+            });
+        }
+        
+        // Form submission
+        function handleSubmit(event) {
+            event.preventDefault();
+            const input = event.target.querySelector('input');
+            const button = event.target.querySelector('button');
+            const originalText = button.innerHTML;
+            
+            button.innerHTML = '<i class="fas fa-check"></i> Odesláno!';
+            button.style.background = '#28a745'; // Zelená pro úspěch
+            
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.style.background = ''; // Vrátí původní styl
+                input.value = '';
+            }, 3000);
+        }
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Animace se spustí jen jednou
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+    </script>
+</body>
+</html>
