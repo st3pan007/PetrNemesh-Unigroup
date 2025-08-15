@@ -91,6 +91,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 2rem;
+            flex-wrap: nowrap;
         }
 
         .logo {
@@ -115,8 +117,14 @@
         .nav-menu {
             display: flex;
             list-style: none;
-            gap: 3rem;
+            gap: 2rem;
             align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-menu li {
+            flex-shrink: 0;
         }
 
         .nav-link {
@@ -145,14 +153,17 @@
 
         .nav-cta {
             background: var(--gradient-1);
-            padding: 0.75rem 2rem;
+            padding: 0.75rem 1.75rem;
             border-radius: 50px;
             color: white;
             text-decoration: none;
             font-weight: 600;
+            font-size: 0.95rem;
+            white-space: nowrap;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            display: inline-block;
         }
 
         .nav-cta::before {
@@ -183,9 +194,14 @@
             flex-direction: column;
             gap: 4px;
             cursor: pointer;
+            background: none;
+            border: none;
+            padding: 5px;
+            z-index: 101;
         }
 
         .mobile-toggle span {
+            display: block;
             width: 25px;
             height: 3px;
             background: var(--text-dark);
@@ -201,8 +217,13 @@
             position: relative;
             overflow: hidden;
             padding-top: 80px;
-            /* Nahrazení gradientu obrázkem s překrytím */
-            background: linear-gradient(rgba(26, 35, 50, 0.7), rgba(26, 35, 50, 0.7)), url('https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') no-repeat center center/cover;
+            /* Světlejší overlay pro jasnější fotku */
+            background: 
+                linear-gradient(to bottom, 
+                    rgba(26, 35, 50, 0.2) 0%, 
+                    rgba(26, 35, 50, 0.3) 50%, 
+                    rgba(26, 35, 50, 0.5) 100%),
+                url('https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/ea923996-a31f-4bbb-892b-7b4490a34a00/public') no-repeat center center/cover;
         }
 
         .hero-content {
@@ -210,9 +231,17 @@
             z-index: 2;
             text-align: center;
             max-width: 1000px;
-            padding: 0 2rem;
+            padding: 3rem 2rem;
             margin: 0 auto;
             color: white;
+            /* Tmavší pozadí jen pod textem pro kontrast */
+            background: linear-gradient(135deg, 
+                rgba(26, 35, 50, 0.85) 0%, 
+                rgba(26, 35, 50, 0.75) 100%);
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
 
         .hero-title {
@@ -222,21 +251,31 @@
             line-height: 1.1;
             margin-bottom: 1.5rem;
             position: relative;
+            /* Výraznější text shadow */
+            text-shadow: 
+                0 2px 4px rgba(0, 0, 0, 0.9),
+                0 4px 8px rgba(0, 0, 0, 0.7),
+                0 8px 32px rgba(0, 0, 0, 0.5);
         }
 
         .hero-title span {
-            background: var(--gradient-1);
+            background: linear-gradient(135deg, #7dd3fc 0%, #3A7CA5 50%, #1e40af 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(var(--text-glow));
+            filter: 
+                drop-shadow(0 2px 4px rgba(0, 0, 0, 0.9))
+                drop-shadow(0 0 20px rgba(58, 124, 165, 0.5));
         }
 
         .hero-subtitle {
             font-size: clamp(1.2rem, 3vw, 1.5rem);
-            color: rgba(255, 255, 255, 0.8);
+            color: white;
             margin-bottom: 3rem;
-            font-weight: 300;
+            font-weight: 500;
             letter-spacing: 0.5px;
+            text-shadow: 
+                0 2px 8px rgba(0, 0, 0, 0.9),
+                0 4px 16px rgba(0, 0, 0, 0.5);
         }
 
         .hero-buttons {
@@ -244,6 +283,7 @@
             gap: 1.5rem;
             justify-content: center;
             flex-wrap: wrap;
+            margin-top: 2rem;
         }
 
         .btn {
@@ -260,22 +300,27 @@
         .btn-primary {
             background: var(--accent);
             color: white;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: var(--shadow-hover);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            background: #2d6a8a;
         }
 
         .btn-secondary {
-            background: transparent;
+            background: rgba(255, 255, 255, 0.1);
             color: white;
             border: 2px solid white;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
         .btn-secondary:hover {
             background: white;
             color: var(--primary);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
         }
 
         /* About Company Section - Vylepšení bod 3 */
@@ -376,7 +421,7 @@
         /* Services Section */
         .services {
             padding: 6rem 2rem;
-            background: var(--bg-light);
+            background: white;
             position: relative;
             overflow: hidden;
         }
@@ -394,133 +439,415 @@
         .service-categories {
             display: flex;
             justify-content: center;
-            gap: 1rem;
+            gap: 0.5rem;
             margin-bottom: 3rem;
             flex-wrap: wrap;
+            padding: 1rem;
+            background: var(--bg-light);
+            border-radius: 100px;
+            max-width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .category-btn {
             padding: 0.75rem 2rem;
-            background: var(--white);
-            border: 1px solid rgba(0,0,0,0.1);
+            background: transparent;
+            border: none;
             color: var(--text-dark);
             border-radius: 50px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 600;
+            position: relative;
+        }
+
+        .category-btn:hover {
+            color: var(--accent);
         }
 
         .category-btn.active {
-            background: var(--gradient-1);
-            border-color: transparent;
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(58, 124, 165, 0.3); /* Upraveno pro novou barvu */
-            color: white;
+            background: white;
+            color: var(--accent);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
             gap: 2rem;
             margin-bottom: 4rem;
         }
 
         .service-card {
             background: white;
-            border: 1px solid rgba(0,0,0,0.05);
-            padding: 2rem;
-            border-radius: 20px;
+            border: 2px solid #f1f5f9;
+            padding: 2.5rem;
+            border-radius: 24px;
             cursor: pointer;
             position: relative;
             overflow: hidden;
-            /* Vylepšení pro JavaScript filtrování - bod 4 */
-            transition: transform 0.4s ease, opacity 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
         }
 
+        /* Gradient border on hover */
         .service-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(58, 124, 165, 0.1), transparent);
-            transition: all 0.5s ease;
+            inset: -2px;
+            border-radius: 24px;
+            padding: 2px;
+            background: linear-gradient(45deg, var(--accent), var(--accent-glow));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .service-card:hover::before {
-            left: 100%;
+            opacity: 1;
         }
 
         .service-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(58, 124, 165, 0.2); /* Upraveno pro novou barvu */
-            border-color: var(--accent);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            border-color: transparent;
         }
 
         .service-header {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
         }
 
         .service-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--gradient-1);
-            border-radius: 15px;
+            width: 70px;
+            height: 70px;
+            background: var(--bg-light);
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            color: white;
+            font-size: 2rem;
+            color: var(--accent);
             flex-shrink: 0;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        /* Kreativní hover efekt pro ikony */
+        .service-icon::after {
+            content: '';
+            position: absolute;
+            inset: -5px;
+            border-radius: 20px;
+            background: var(--gradient-1);
+            opacity: 0;
+            filter: blur(15px);
+            transition: all 0.3s ease;
+            z-index: -1;
+        }
+
+        .service-card:hover .service-icon {
+            background: var(--gradient-1);
+            color: white;
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        .service-card:hover .service-icon::after {
+            opacity: 0.4;
         }
 
         .service-card h3 {
             color: var(--text-dark);
-            font-size: 1.3rem;
+            font-size: 1.4rem;
+            margin: 0;
+            font-weight: 700;
         }
 
-        .service-card p {
+        .service-card > p {
             color: var(--text-light);
-            margin-bottom: 1rem;
-            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            flex-grow: 1;
         }
 
         .service-card ul {
             list-style: none;
             padding: 0;
-            margin-top: 1rem;
+            margin-top: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
         }
 
         .service-card ul li {
-            padding: 0.5rem 0;
+            padding: 0.5rem 0.75rem;
             color: var(--text-light);
             font-size: 0.95rem;
+            background: var(--bg-light);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.3s ease;
         }
 
         .service-card ul li i {
             color: var(--accent);
-            margin-right: 0.5rem;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .service-card:hover ul li {
+            background: rgba(58, 124, 165, 0.05);
+            transform: translateX(5px);
+        }
+
+        /* Portfolio Gallery Section */
+        .portfolio {
+            padding: 8rem 2rem;
+            background: var(--white);
+            position: relative;
+        }
+
+        .portfolio-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .comparison-gallery {
+            margin-top: 4rem;
+        }
+
+        .comparison-showcase {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+        }
+
+        .comparison-viewer {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 
+                0 4px 6px -1px rgba(0, 0, 0, 0.1),
+                0 2px 4px -1px rgba(0, 0, 0, 0.06),
+                0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            background: #000;
+        }
+
+        .image-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            overflow: hidden;
+        }
+
+        .image-before,
+        .image-after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            user-select: none;
+        }
+
+        .image-after {
+            clip-path: inset(0 0 0 50%);
+            transition: clip-path 0s;
+        }
+
+        /* Smooth dragging */
+        .comparison-viewer.dragging .image-after {
+            transition: none;
+        }
+
+        .comparison-slider {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+        }
+
+        .slider-track {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 3px;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-50%);
+            transition: opacity 0.3s;
+        }
+
+        .slider-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 48px;
+            height: 48px;
+            transform: translate(-50%, -50%);
+            background: var(--accent);
+            border-radius: 50%;
+            cursor: grab;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 
+                0 0 0 3px rgba(255, 255, 255, 0.5),
+                0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slider-button:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+            box-shadow: 
+                0 0 0 4px rgba(255, 255, 255, 0.6),
+                0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .slider-button:active {
+            cursor: grabbing;
+            transform: translate(-50%, -50%) scale(0.95);
+        }
+
+        /* Labels s blur efektem */
+        .comparison-labels {
+            position: absolute;
+            top: 24px;
+            left: 24px;
+            right: 24px;
+            display: flex;
+            justify-content: space-between;
+            pointer-events: none;
+        }
+
+        .label-before,
+        .label-after {
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 100px;
+            color: white;
+            font-weight: 600;
+            font-size: 0.875rem;
+            letter-spacing: 0.5px;
+            opacity: 0;
+            animation: fadeInUp 0.6s 0.3s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+        }
+
+        /* Thumbnails Grid */
+        .comparison-thumbnails {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .thumb {
+            position: relative;
+            aspect-ratio: 16/9;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #f3f4f6;
+        }
+
+        .thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .thumb-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                180deg, 
+                transparent 0%, 
+                rgba(0, 0, 0, 0.4) 100%
+            );
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .thumb:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .thumb:hover img {
+            transform: scale(1.05);
+        }
+
+        .thumb:hover .thumb-overlay {
+            opacity: 1;
+        }
+
+        .thumb.active {
+            border-color: var(--accent);
         }
 
         /* Process Section - Premium */
         .process {
             padding: 6rem 2rem;
-            background: var(--gradient-dark);
+            background: linear-gradient(135deg, 
+                #f8fafc 0%, 
+                #e1e7ed 100%);
             position: relative;
             overflow: hidden;
         }
         
+        /* Dekorativní pattern v pozadí */
+        .process::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 1px 1px, rgba(58, 124, 165, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+        }
+        
         .process .section-header {
             text-align: center;
+            position: relative;
+            z-index: 1;
         }
 
         .process .section-header h2,
         .process .section-header p {
-            color: white;
+            color: var(--text-dark);
         }
 
         .process-flow {
@@ -530,6 +857,7 @@
             max-width: 1200px;
             margin: 4rem auto 0;
             position: relative;
+            z-index: 1;
         }
 
         .process-line {
@@ -537,32 +865,30 @@
             top: 40px;
             left: 10%;
             right: 10%;
-            height: 2px;
+            height: 4px;
             background: linear-gradient(90deg, 
                 transparent 0%, 
-                var(--accent) 20%, 
-                var(--accent) 80%, 
+                #e2e8f0 20%, 
+                #e2e8f0 80%, 
                 transparent 100%);
-            opacity: 0.3;
             z-index: 0;
         }
 
         .process-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: white;
+            border: 2px solid transparent;
             border-radius: 20px;
             padding: 2rem;
             position: relative;
             z-index: 1;
-            transition: all 0.4s ease;
-            transform-style: preserve-3d;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 
         .process-card:hover {
-            transform: translateY(-10px) rotateX(5deg);
-            background: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 30px 60px rgba(58, 124, 165, 0.3); /* Upraveno pro novou barvu */
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            border-color: var(--accent);
         }
 
         .process-number {
@@ -572,12 +898,13 @@
             transform: translateX(-50%);
             width: 80px;
             height: 80px;
-            background: var(--gradient-1);
+            background: white;
+            border: 4px solid var(--accent);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 10px 30px rgba(58, 124, 165, 0.5); /* Upraveno pro novou barvu */
+            box-shadow: 0 10px 20px rgba(58, 124, 165, 0.2);
             z-index: 2;
         }
 
@@ -585,23 +912,14 @@
             font-family: 'Space Grotesk', sans-serif;
             font-size: 2rem;
             font-weight: 800;
-            color: white;
-        }
-
-        .number-glow {
-            position: absolute;
-            width: 100%;
-            height: 100%;
             background: var(--gradient-1);
-            border-radius: 50%;
-            opacity: 0.5;
-            animation: pulse-glow 2s ease-in-out infinite;
-            z-index: -1;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        @keyframes pulse-glow {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.2); opacity: 0.2; }
+        /* Odstranění pulse animace pro čistší vzhled */
+        .number-glow {
+            display: none;
         }
 
         .process-content {
@@ -612,12 +930,12 @@
         .process-content h3 {
             font-size: 1.5rem;
             font-weight: 700;
-            color: white;
+            color: var(--text-dark);
             margin-bottom: 1rem;
         }
 
         .process-content p {
-            color: rgba(255, 255, 255, 0.8);
+            color: var(--text-light);
             line-height: 1.6;
             margin-bottom: 1.5rem;
         }
@@ -626,27 +944,23 @@
             width: 60px;
             height: 60px;
             margin: 0 auto;
-            background: rgba(58, 124, 165, 0.1);
+            background: var(--gradient-1);
             border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(58, 124, 165, 0.3);
         }
 
         .process-icon i {
             font-size: 1.8rem;
-            color: var(--accent);
+            color: white;
             transition: all 0.3s ease;
         }
 
         .process-card:hover .process-icon {
-            background: rgba(58, 124, 165, 0.2);
-            transform: scale(1.1);
-        }
-
-        .process-card:hover .process-icon i {
-            transform: rotate(10deg);
+            transform: scale(1.1) rotate(5deg);
         }
 
         /* Contact Section */
@@ -1054,12 +1368,74 @@
             .map-wrapper {
                 min-height: 400px;
             }
+
+            .comparison-thumbnails {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+                margin: 2rem auto 0;
+            }
+            
+            .hero-buttons .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* Tablet specific fixes */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .nav-menu {
+                gap: 1.5rem;
+                font-size: 0.95rem;
+            }
+            
+            .nav-link {
+                font-size: 0.9rem;
+            }
+            
+            .logo {
+                font-size: 1.75rem;
+            }
         }
 
         @media (max-width: 640px) {
             .process-flow {
                 grid-template-columns: 1fr;
                 gap: 4rem;
+            }
+        }
+
+        /* Mobile excellence */
+        @media (max-width: 768px) {
+            .comparison-thumbnails {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            
+            .comparison-labels {
+                top: 16px;
+                left: 16px;
+                right: 16px;
+            }
+            
+            .label-before,
+            .label-after {
+                padding: 6px 16px;
+                font-size: 0.75rem;
+            }
+        }
+
+        /* Performance optimizations */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
         }
 
@@ -1087,6 +1463,7 @@
                 <li><a href="#hero" class="nav-link">Domů</a></li>
                 <li><a href="#about-company" class="nav-link">O nás</a></li>
                 <li><a href="#services" class="nav-link">Služby</a></li>
+                <li><a href="#portfolio" class="nav-link">Realizace</a></li>
                 <li><a href="#process" class="nav-link">Jak to funguje</a></li>
                 <li><a href="#contact" class="nav-link">Kontakt</a></li>
                 <li><a href="#cta" class="nav-cta">Začít projekt</a></li>
@@ -1158,7 +1535,7 @@
                     </div>
                 </div>
                 <div class="about-company-visual fade-in">
-                    <img src="https://images.pexels.com/photos/834892/pexels-photo-834892.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Tým profesionálů při práci">
+                    <img src="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/fdb2a53c-406a-4032-3c9b-76cadbb23300/public" alt="Náš tým při práci">
                 </div>
             </div>
         </div>
@@ -1291,6 +1668,71 @@
                     Chci nezávaznou nabídku
                 </a>
             </div>
+    </section>
+
+    <section class="portfolio" id="portfolio">
+        <div class="portfolio-wrapper">
+            <div class="section-header fade-in">
+                <h2 class="section-title">Naše realizace</h2>
+                <p class="section-subtitle">Fotovoltaické systémy, které mění budoucnost</p>
+            </div>
+            
+            <div class="comparison-gallery">
+                <!-- Hlavní showcase -->
+                <div class="comparison-showcase" data-comparison="main">
+                    <div class="comparison-viewer">
+                        <div class="image-wrapper">
+                            <img class="image-before" src="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/0592963c-0f0d-4e7d-17be-aefdcd687900/public" alt="Před">
+                            <img class="image-after" src="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/2a0d6e01-9d6b-421e-4756-bee970962400/public" alt="Po">
+                        </div>
+                        <div class="comparison-slider">
+                            <div class="slider-track"></div>
+                            <div class="slider-button">
+                                <svg width="24" height="24" viewBox="0 0 24 24">
+                                    <path d="M8 9l-3 3 3 3M16 9l3 3-3 3" stroke="currentColor" stroke-width="2" fill="none"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="comparison-labels">
+                            <span class="label-before">PŘED</span>
+                            <span class="label-after">PO</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Thumbnails grid -->
+                <div class="comparison-thumbnails">
+                    <button class="thumb active" data-before="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/0592963c-0f0d-4e7d-17be-aefdcd687900/public" data-after="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/2a0d6e01-9d6b-421e-4756-bee970962400/public">
+                        <img src="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/2a0d6e01-9d6b-421e-4756-bee970962400/public" alt="">
+                        <div class="thumb-overlay"></div>
+                    </button>
+                    <button class="thumb" data-before="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/20dc660c-6d6c-457e-8ca8-894399a70900/public" data-after="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/4bb75f48-ba24-4eaf-fce3-c84da8743100/public">
+                        <img src="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/4bb75f48-ba24-4eaf-fce3-c84da8743100/public" alt="">
+                        <div class="thumb-overlay"></div>
+                    </button>
+                    <button class="thumb" data-before="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/b494d380-286d-4864-9901-8d1b44a03900/public" data-after="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/5db5f3a9-24c7-4be1-8cf9-04ee2dc7dc00/public">
+                        <img src="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/5db5f3a9-24c7-4be1-8cf9-04ee2dc7dc00/public" alt="">
+                        <div class="thumb-overlay"></div>
+                    </button>
+                    <button class="thumb" data-before="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/10a8bb3c-c272-448e-af17-134ed51c0300/public" data-after="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/b9fd1d25-0b9e-4c1f-a3b8-d44944ac2900/public">
+                        <img src="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/b9fd1d25-0b9e-4c1f-a3b8-d44944ac2900/public" alt="">
+                        <div class="thumb-overlay"></div>
+                    </button>
+                    <button class="thumb" data-before="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/c109fc1e-5178-402b-352f-8d2ffe2cae00/public" data-after="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/03315186-fbc0-421f-1290-2fdc991cfd00/public">
+                        <img src="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/03315186-fbc0-421f-1290-2fdc991cfd00/public" alt="">
+                        <div class="thumb-overlay"></div>
+                    </button>
+                    <button class="thumb" data-before="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/ac54db51-0e4c-4260-c63f-b26ae6b8e900/public" data-after="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/48e77aa8-7a75-4154-e049-60f2767edc00/public">
+                        <img src="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/48e77aa8-7a75-4154-e049-60f2767edc00/public" alt="">
+                        <div class="thumb-overlay"></div>
+                    </button>
+                    <button class="thumb" data-before="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/7d3c6a3a-d70b-4ac0-c203-5b1182bb3c00/public" data-after="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/5ee04f5a-8289-4323-92d4-49c0bac8f400/public">
+                        <img src="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/5ee04f5a-8289-4323-92d4-49c0bac8f400/public" alt="">
+                        <div class="thumb-overlay"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
     </section>
 
     <section class="process" id="process">
@@ -1580,6 +2022,104 @@
                 input.value = '';
             }, 3000);
         }
+
+        // Comparison Gallery Class
+        class ComparisonGallery {
+            constructor() {
+                this.viewer = document.querySelector('.comparison-viewer');
+                this.imageAfter = document.querySelector('.image-after');
+                this.slider = document.querySelector('.comparison-slider');
+                this.sliderButton = document.querySelector('.slider-button');
+                this.thumbnails = document.querySelectorAll('.thumb');
+                
+                this.isDragging = false;
+                this.currentX = 50;
+                
+                this.init();
+            }
+            
+            init() {
+                // Desktop events
+                this.sliderButton.addEventListener('mousedown', this.startDrag.bind(this));
+                document.addEventListener('mousemove', this.drag.bind(this));
+                document.addEventListener('mouseup', this.endDrag.bind(this));
+                
+                // Touch events
+                this.sliderButton.addEventListener('touchstart', this.startDrag.bind(this), {passive: true});
+                document.addEventListener('touchmove', this.drag.bind(this), {passive: true});
+                document.addEventListener('touchend', this.endDrag.bind(this));
+                
+                // Thumbnails
+                this.thumbnails.forEach(thumb => {
+                    thumb.addEventListener('click', this.switchImages.bind(this));
+                });
+                
+                // Keyboard support
+                document.addEventListener('keydown', this.handleKeyboard.bind(this));
+            }
+            
+            startDrag(e) {
+                this.isDragging = true;
+                this.viewer.classList.add('dragging');
+                e.preventDefault();
+            }
+            
+            drag(e) {
+                if (!this.isDragging) return;
+                
+                const rect = this.viewer.getBoundingClientRect();
+                const x = (e.type.includes('touch')) ? e.touches[0].clientX : e.clientX;
+                const position = ((x - rect.left) / rect.width) * 100;
+                
+                this.updatePosition(Math.max(0, Math.min(100, position)));
+            }
+            
+            endDrag() {
+                this.isDragging = false;
+                this.viewer.classList.remove('dragging');
+            }
+            
+            updatePosition(position) {
+                this.currentX = position;
+                this.imageAfter.style.clipPath = `inset(0 0 0 ${position}%)`;
+                this.slider.style.left = `${position}%`;
+            }
+            
+            switchImages(e) {
+                const thumb = e.currentTarget;
+                const beforeSrc = thumb.dataset.before;
+                const afterSrc = thumb.dataset.after;
+                
+                // Update active state
+                this.thumbnails.forEach(t => t.classList.remove('active'));
+                thumb.classList.add('active');
+                
+                // Reset slider to center
+                this.updatePosition(50);
+                
+                // Smooth transition
+                this.viewer.style.opacity = '0.8';
+                
+                setTimeout(() => {
+                    document.querySelector('.image-before').src = beforeSrc;
+                    document.querySelector('.image-after').src = afterSrc;
+                    this.viewer.style.opacity = '1';
+                }, 150);
+            }
+            
+            handleKeyboard(e) {
+                if (e.key === 'ArrowLeft') {
+                    this.updatePosition(Math.max(0, this.currentX - 5));
+                } else if (e.key === 'ArrowRight') {
+                    this.updatePosition(Math.min(100, this.currentX + 5));
+                }
+            }
+        }
+
+        // Initialize Gallery
+        document.addEventListener('DOMContentLoaded', () => {
+            new ComparisonGallery();
+        });
 
         // Intersection Observer for animations
         const observerOptions = {
