@@ -2264,8 +2264,10 @@
             <h2>Připraveni změnit váš prostor?</h2>
             <p>Nechte nám kontakt. Ozveme se do 24 hodin.</p>
 
-            <form class="cta-form" onsubmit="handleSubmit(event)">
-                <input type="tel" class="cta-input" placeholder="Váš telefon" required pattern="[0-9\s\+\-]+" title="Zadejte platné telefonní číslo">
+            <form class="cta-form" id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+                <!-- Nahraďte YOUR_ACCESS_KEY vaším klíčem z web3forms.com -->
+                <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY">
+                <input type="tel" name="phone" class="cta-input" placeholder="Váš telefon" required pattern="[0-9\s\+\-]+" title="Zadejte platné telefonní číslo">
                 <button type="submit" class="cta-submit">
                     <i class="fas fa-paper-plane"></i> Odeslat
                 </button>
@@ -2515,37 +2517,81 @@
         }
         
         // Form submission
-        function handleSubmit(event) {
-            event.preventDefault();
-            const input = event.target.querySelector('input');
-            const phone = input.value;
-            const button = event.target.querySelector('button');
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            const phone = this.querySelector('input[name="phone"]').value;
+            const button = this.querySelector('button');
             const originalText = button.innerHTML;
             
             // Detekce mobilního zařízení
             const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
             
             if (isMobile) {
+                // Zrušit normální odeslání formuláře
+                event.preventDefault();
+                
                 // WhatsApp pro mobily
                 const message = `Dobrý den, mám zájem o nezávaznou nabídku. Můj telefon: ${phone}`;
                 window.open(`https://wa.me/420775710770?text=${encodeURIComponent(message)}`);
+                
+                // Vizuální potvrzení
+                button.innerHTML = '<i class="fas fa-check"></i> Odesláno!';
+                button.style.background = '#28a745';
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.style.background = '';
+                    this.reset();
+                }, 3000);
             } else {
-                // Email pro PC
-                const subject = 'Poptávka rekonstrukce';
-                const body = `Dobrý den,\n\nMám zájem o nezávaznou nabídku.\n\nMůj telefon: ${phone}\n\nS pozdravem`;
-                window.location.href = `mailto:unigroup@post.cz?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                // PC - formulář se odešle normálně přes Formspree
+                // Vizuální potvrzení se ukáže po úspěšném odeslání
+                
+                // Přidat skryté pole pro lepší identifikaci
+                const hiddenField = document.createElement('input');
+                hiddenField.type = 'hidden';
+                hiddenField.name = 'subject';
+                hiddenField.value = 'Nová poptávka z webu UniGroup';
+                this.appendChild(hiddenField);
+                
+                // Přidat redirect pro Web3Forms
+                const redirectField = document.createElement('input');
+                redirectField.type = 'hidden';
+                redirectField.name = 'redirect';
+                redirectField.value = window.location.href + '#success';
+                this.appendChild(redirectField);
+            }
+        });
+
+        // Web3Forms úspěšné odeslání
+        window.addEventListener('load', function() {
+            const form = document.getElementById('contact-form');
+            
+            // Kontrola úspěšného odeslání Web3Forms
+            if (window.location.hash === '#success') {
+                const button = form.querySelector('button');
+                button.innerHTML = '<i class="fas fa-check"></i> Odesláno!';
+                button.style.background = '#28a745';
+                
+                // Vyčistit hash z URL
+                history.replaceState(null, null, ' ');
+                
+                // Vrátit původní stav tlačítka
+                setTimeout(() => {
+                    button.innerHTML = '<i class="fas fa-paper-plane"></i> Odeslat';
+                    button.style.background = '';
+                }, 3000);
             }
             
-            // Vizuální potvrzení
-            button.innerHTML = '<i class="fas fa-check"></i> Odesláno!';
-            button.style.background = '#28a745';
-            
-            setTimeout(() => {
-                button.innerHTML = originalText;
-                button.style.background = '';
-                input.value = '';
-            }, 3000);
-        }
+            if (form) {
+                form.addEventListener('submit', function() {
+                    if (!/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                        // Pro PC - ukázat "Odesílám..." během odesílání
+                        const button = form.querySelector('button');
+                        button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Odesílám...';
+                    }
+                });
+            }
+        });
 
         // Comparison Gallery Class
         class ComparisonGallery {
