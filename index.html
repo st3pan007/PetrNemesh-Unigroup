@@ -68,7 +68,7 @@
             border-radius: 10px;
         }
 
-        /* Navigation */
+        /* Navigation - UPRAVENO */
         .nav {
             position: fixed;
             top: 0;
@@ -186,7 +186,7 @@
 
         .nav-cta:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(58, 124, 165, 0.4); /* Upraveno pro novou barvu */
+            box-shadow: 0 10px 30px rgba(58, 124, 165, 0.4);
         }
 
         .mobile-toggle {
@@ -209,7 +209,7 @@
             transition: all 0.3s ease;
         }
 
-        /* Hero Section - Vylepšení bod 3 */
+        /* Hero Section */
         #hero {
             min-height: 100vh;
             display: flex;
@@ -217,7 +217,6 @@
             position: relative;
             overflow: hidden;
             padding-top: 80px;
-            /* Světlejší overlay pro jasnější fotku */
             background: 
                 linear-gradient(to bottom, 
                     rgba(26, 35, 50, 0.15) 0%, 
@@ -244,7 +243,6 @@
             line-height: 1.1;
             margin-bottom: 1.5rem;
             position: relative;
-            /* Výraznější text shadow */
             text-shadow: 
                 0 2px 4px rgba(0, 0, 0, 0.9),
                 0 4px 8px rgba(0, 0, 0, 0.7),
@@ -313,7 +311,7 @@
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
         }
 
-        /* About Company Section - Vylepšení bod 3 */
+        /* About Company Section */
         .about-company {
             padding: 6rem 2rem;
             background: white;
@@ -323,7 +321,7 @@
 
         .about-company-content {
             display: grid;
-            grid-template-columns: 1fr 0.8fr; /* Upraven poměr pro lepší vzhled obrázku */
+            grid-template-columns: 1fr 0.8fr;
             gap: 4rem;
             align-items: center;
             max-width: 1200px;
@@ -379,7 +377,7 @@
         .benefit-box:hover {
             transform: translateY(-3px);
             border-color: var(--accent);
-            box-shadow: 0 10px 25px rgba(58, 124, 165, 0.1); /* Upraveno pro novou barvu */
+            box-shadow: 0 10px 25px rgba(58, 124, 165, 0.1);
         }
 
         .benefit-box i {
@@ -408,14 +406,175 @@
             max-height: 450px;
         }
 
-        /* Services Section */
+        /* NEW: Floor Realizations Section */
+        .floor-realizations {
+            padding: 6rem 2rem;
+            background: var(--bg-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .floor-realizations::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(180deg, white 0%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .floor-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .floor-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .floor-header h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        /* Floor Gallery Slider */
+        .floor-gallery {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .floor-slider-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .floor-slider {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .floor-slide {
+            min-width: 100%;
+            position: relative;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+        }
+
+        .floor-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .floor-slide-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 3rem;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+            color: white;
+            transform: translateY(10px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .floor-slide.active .floor-slide-info {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .floor-slide-info h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .floor-slide-info p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Slider Controls */
+        .floor-controls {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 2rem;
+            pointer-events: none;
+        }
+
+        .floor-control {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            pointer-events: all;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .floor-control:hover {
+            background: white;
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .floor-control i {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        /* Slider Dots */
+        .floor-dots {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .floor-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #d1d5db;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .floor-dot.active {
+            background: var(--accent);
+            transform: scale(1.3);
+        }
+
+        /* Services Section - ROZŠÍŘENO O PODLAHY */
         .services {
             padding: 6rem 2rem;
             background: white;
             position: relative;
             overflow: hidden;
         }
-        
+
         .services .section-header {
             text-align: center;
             margin-bottom: 3rem;
@@ -482,7 +641,6 @@
             flex-direction: column;
         }
 
-        /* Gradient border on hover */
         .service-card::before {
             content: '';
             position: absolute;
@@ -529,7 +687,6 @@
             position: relative;
         }
 
-        /* Kreativní hover efekt pro ikony */
         .service-icon::after {
             content: '';
             position: absolute;
@@ -1166,7 +1323,7 @@
             font-size: 1.2rem;
         }
 
-        /* Footer */
+        /* Footer - UPRAVENO */
         .footer {
             padding: 4rem 2rem 2rem;
             background: var(--dark);
@@ -1250,6 +1407,44 @@
             padding-top: 2rem;
             border-top: 1px solid rgba(255,255,255,0.1);
             color: rgba(255, 255, 255, 0.5);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-bottom-left {
+            text-align: left;
+        }
+
+        .footer-bottom-right {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-bottom-right a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.7);
+            transition: all 0.3s ease;
+        }
+
+        .footer-bottom-right a:hover {
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom-right img {
+            height: 25px;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+
+        .footer-bottom-right a:hover img {
+            opacity: 1;
         }
 
         /* Container */
@@ -1280,8 +1475,7 @@
             margin: 0 auto;
         }
 
-
-        /* Responsive - Vylepšení bod 5 */
+        /* Responsive */
         @media (max-width: 1024px) {
             .process-flow {
                 grid-template-columns: repeat(2, 1fr);
@@ -1289,6 +1483,9 @@
             }
             .process-line { display: none; }
             .about-company-content { grid-template-columns: 1fr; }
+            .floor-controls {
+                padding: 0 1rem;
+            }
         }
 
         @media (max-width: 768px) {
@@ -1310,7 +1507,6 @@
                 left: 0;
             }
             
-            /* Vylepšení CTA tlačítka v mobilním menu */
             .nav-menu li:last-child {
                 margin-top: auto;
                 padding-top: 2rem;
@@ -1349,7 +1545,6 @@
                 grid-template-columns: 1fr;
             }
             
-            /* Vylepšení sekce Kontakt */
             .contact-wrapper {
                 grid-template-columns: 1fr;
                 gap: 2rem;
@@ -1373,6 +1568,29 @@
             
             .hero-buttons .btn {
                 width: 100%;
+                text-align: center;
+            }
+
+            .floor-control {
+                width: 50px;
+                height: 50px;
+            }
+
+            .floor-slide-info {
+                padding: 2rem;
+            }
+
+            .floor-slide-info h3 {
+                font-size: 1.5rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .footer-bottom-left {
                 text-align: center;
             }
         }
@@ -1450,11 +1668,8 @@
                 UniGroup
             </a>
             <ul class="nav-menu" id="navMenu">
-                <li><a href="#hero" class="nav-link">Domů</a></li>
                 <li><a href="#about-company" class="nav-link">O nás</a></li>
-                <li><a href="#services" class="nav-link">Služby</a></li>
-                <li><a href="#portfolio" class="nav-link">Realizace</a></li>
-                <li><a href="#process" class="nav-link">Jak to funguje</a></li>
+                <li><a href="#floor-realizations" class="nav-link">Realizace</a></li>
                 <li><a href="#contact" class="nav-link">Kontakt</a></li>
                 <li><a href="#cta" class="nav-cta">Začít projekt</a></li>
             </ul>
@@ -1531,6 +1746,74 @@
         </div>
     </section>
 
+    <!-- NOVÁ SEKCE: Realizace podlah -->
+    <section class="floor-realizations" id="floor-realizations">
+        <div class="floor-container">
+            <div class="floor-header fade-in">
+                <h2>Realizace podlah</h2>
+            </div>
+            
+            <div class="floor-gallery fade-in">
+                <div class="floor-slider-wrapper">
+                    <div class="floor-slider" id="floorSlider">
+                        <div class="floor-slide active">
+                            <img src="https://images.pexels.com/photos/5089180/pexels-photo-5089180.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Luxusní parkety">
+                            <div class="floor-slide-info">
+                                <h3>Luxusní dubové parkety</h3>
+                                <p>Masivní dubová podlaha s matným lakem, Praha 2</p>
+                            </div>
+                        </div>
+                        <div class="floor-slide">
+                            <img src="https://images.pexels.com/photos/6969870/pexels-photo-6969870.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Vinylová podlaha">
+                            <div class="floor-slide-info">
+                                <h3>Vinylová podlaha Click</h3>
+                                <p>Voděodolná vinylová podlaha s dekorem ořechu, Brno</p>
+                            </div>
+                        </div>
+                        <div class="floor-slide">
+                            <img src="https://images.pexels.com/photos/7534561/pexels-photo-7534561.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Renovace parket">
+                            <div class="floor-slide-info">
+                                <h3>Renovace historických parket</h3>
+                                <p>Kompletní renovace 100 let starých parket, Praha 1</p>
+                            </div>
+                        </div>
+                        <div class="floor-slide">
+                            <img src="https://images.pexels.com/photos/5824901/pexels-photo-5824901.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Laminátová podlaha">
+                            <div class="floor-slide-info">
+                                <h3>Laminátová podlaha AC5</h3>
+                                <p>Vysoce odolná laminátová podlaha do kanceláří, Ostrava</p>
+                            </div>
+                        </div>
+                        <div class="floor-slide">
+                            <img src="https://images.pexels.com/photos/3935333/pexels-photo-3935333.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Průmyslová podlaha">
+                            <div class="floor-slide-info">
+                                <h3>Epoxidová stěrka</h3>
+                                <p>Průmyslová epoxidová podlaha do výrobní haly, Plzeň</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="floor-controls">
+                        <button class="floor-control" id="floorPrev">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="floor-control" id="floorNext">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="floor-dots" id="floorDots">
+                    <button class="floor-dot active"></button>
+                    <button class="floor-dot"></button>
+                    <button class="floor-dot"></button>
+                    <button class="floor-dot"></button>
+                    <button class="floor-dot"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="services" id="services">
         <div class="services-container">
             <div class="section-header">
@@ -1543,9 +1826,72 @@
                 <button class="category-btn" onclick="filterServices('technical')">Technické</button>
                 <button class="category-btn" onclick="filterServices('interior')">Interiéry</button>
                 <button class="category-btn" onclick="filterServices('exterior')">Exteriéry</button>
+                <button class="category-btn" onclick="filterServices('floors')">Podlahy</button>
             </div>
 
             <div class="services-grid">
+                <!-- Nové služby - Podlahy -->
+                <div class="service-card" data-category="floors">
+                    <div class="service-header">
+                        <div class="service-icon">
+                            <i class="fas fa-layer-group"></i>
+                        </div>
+                        <h3>Podlahové systémy</h3>
+                    </div>
+                    <p>Profesionální montáž speciálních podlahových systémů pro náročné aplikace. Zdvojené podlahy, Farmacell a Cetris desky.</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i>Zdvojené podlahy</li>
+                        <li><i class="fas fa-check"></i>Farmacell systém</li>
+                        <li><i class="fas fa-check"></i>Cetris desky</li>
+                    </ul>
+                </div>
+
+                <div class="service-card" data-category="floors">
+                    <div class="service-header">
+                        <div class="service-icon">
+                            <i class="fas fa-th"></i>
+                        </div>
+                        <h3>Podlahové krytiny</h3>
+                    </div>
+                    <p>Dodávka a montáž všech typů podlahových krytin. Od ekonomických variant po luxusní řešení.</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i>Laminátové podlahy</li>
+                        <li><i class="fas fa-check"></i>Vinylové podlahy</li>
+                        <li><i class="fas fa-check"></i>Parkety a koberce</li>
+                    </ul>
+                </div>
+
+                <div class="service-card" data-category="floors">
+                    <div class="service-header">
+                        <div class="service-icon">
+                            <i class="fas fa-stairs"></i>
+                        </div>
+                        <h3>Stavební prvky</h3>
+                    </div>
+                    <p>Kompletní realizace schodišť, příček a dalších stavebních prvků včetně povrchové úpravy.</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i>Schodiště na míru</li>
+                        <li><i class="fas fa-check"></i>Montáž příček</li>
+                        <li><i class="fas fa-check"></i>Parapety všech typů</li>
+                    </ul>
+                </div>
+
+                <div class="service-card" data-category="floors">
+                    <div class="service-header">
+                        <div class="service-icon">
+                            <i class="fas fa-undo"></i>
+                        </div>
+                        <h3>Renovace & restaurování</h3>
+                    </div>
+                    <p>Profesionální renovace starých parket, schodů a historických podlah. Zachováme původní krásu.</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i>Renovace parket</li>
+                        <li><i class="fas fa-check"></i>Obnova schodišť</li>
+                        <li><i class="fas fa-check"></i>Historické podlahy</li>
+                    </ul>
+                </div>
+
+                <!-- Původní služby -->
                 <div class="service-card" data-category="technical">
                     <div class="service-header">
                         <div class="service-icon">
@@ -1609,7 +1955,7 @@
                 <div class="service-card" data-category="interior">
                     <div class="service-header">
                         <div class="service-icon">
-                            <i class="fas fa-layer-group"></i>
+                            <i class="fas fa-cube"></i>
                         </div>
                         <h3>Sádrokartony PROFI</h3>
                     </div>
@@ -1658,6 +2004,7 @@
                     Chci nezávaznou nabídku
                 </a>
             </div>
+        </div>
     </section>
 
     <section class="portfolio" id="portfolio">
@@ -1912,7 +2259,15 @@
         </div>
 
         <div class="footer-bottom">
-            <p>© 2025 UniGroup s.r.o. | Všechna práva vyhrazena</p>           
+            <div class="footer-bottom-left">
+                <p>© 2025 UniGroup s.r.o. | Všechna práva vyhrazena</p>
+            </div>
+            <div class="footer-bottom-right">
+                <span>Webové stránky od</span>
+                <a href="https://www.mescon.cz/webove-stranky/" target="_blank" rel="noopener noreferrer">
+                    <img src="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/40be5d28-47ca-4830-fcae-0a3ee9e60200/public" alt="Mescon">
+                </a>
+            </div>
         </div>
     </footer>
 
@@ -1957,11 +2312,110 @@
             });
         });
 
-        // Vylepšené filtrování služeb - Bod 4
+        // Floor Gallery Slider
+        class FloorSlider {
+            constructor() {
+                this.slider = document.getElementById('floorSlider');
+                this.slides = this.slider.querySelectorAll('.floor-slide');
+                this.dots = document.querySelectorAll('.floor-dot');
+                this.prevBtn = document.getElementById('floorPrev');
+                this.nextBtn = document.getElementById('floorNext');
+                this.currentSlide = 0;
+                this.totalSlides = this.slides.length;
+                this.autoPlayInterval = null;
+                
+                this.init();
+            }
+            
+            init() {
+                // Button events
+                this.prevBtn.addEventListener('click', () => this.prevSlide());
+                this.nextBtn.addEventListener('click', () => this.nextSlide());
+                
+                // Dot events
+                this.dots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => this.goToSlide(index));
+                });
+                
+                // Touch events for mobile
+                let touchStartX = 0;
+                let touchEndX = 0;
+                
+                this.slider.addEventListener('touchstart', (e) => {
+                    touchStartX = e.changedTouches[0].screenX;
+                });
+                
+                this.slider.addEventListener('touchend', (e) => {
+                    touchEndX = e.changedTouches[0].screenX;
+                    this.handleSwipe();
+                });
+                
+                // Autoplay
+                this.startAutoPlay();
+                
+                // Pause on hover
+                this.slider.parentElement.addEventListener('mouseenter', () => this.stopAutoPlay());
+                this.slider.parentElement.addEventListener('mouseleave', () => this.startAutoPlay());
+            }
+            
+            handleSwipe() {
+                const touchDiff = touchStartX - touchEndX;
+                if (Math.abs(touchDiff) > 50) {
+                    if (touchDiff > 0) {
+                        this.nextSlide();
+                    } else {
+                        this.prevSlide();
+                    }
+                }
+            }
+            
+            updateSlider() {
+                // Move slider
+                this.slider.style.transform = `translateX(-${this.currentSlide * 100}%)`;
+                
+                // Update active states
+                this.slides.forEach((slide, index) => {
+                    slide.classList.toggle('active', index === this.currentSlide);
+                });
+                
+                this.dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === this.currentSlide);
+                });
+            }
+            
+            nextSlide() {
+                this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
+                this.updateSlider();
+            }
+            
+            prevSlide() {
+                this.currentSlide = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
+                this.updateSlider();
+            }
+            
+            goToSlide(index) {
+                this.currentSlide = index;
+                this.updateSlider();
+            }
+            
+            startAutoPlay() {
+                this.stopAutoPlay();
+                this.autoPlayInterval = setInterval(() => this.nextSlide(), 5000);
+            }
+            
+            stopAutoPlay() {
+                if (this.autoPlayInterval) {
+                    clearInterval(this.autoPlayInterval);
+                    this.autoPlayInterval = null;
+                }
+            }
+        }
+
+        // Services filter
         function filterServices(category) {
             const buttons = document.querySelectorAll('.category-btn');
             const cards = document.querySelectorAll('.service-card');
-            const transitionDuration = 400; // musí odpovídat CSS transition
+            const transitionDuration = 400;
 
             // Update active button
             buttons.forEach(btn => btn.classList.remove('active'));
@@ -2004,11 +2458,11 @@
             const originalText = button.innerHTML;
             
             button.innerHTML = '<i class="fas fa-check"></i> Odesláno!';
-            button.style.background = '#28a745'; // Zelená pro úspěch
+            button.style.background = '#28a745';
             
             setTimeout(() => {
                 button.innerHTML = originalText;
-                button.style.background = ''; // Vrátí původní styl
+                button.style.background = '';
                 input.value = '';
             }, 3000);
         }
@@ -2106,31 +2560,32 @@
             }
         }
 
-        // Initialize Gallery
+        // Initialize everything when DOM is ready
         document.addEventListener('DOMContentLoaded', () => {
+            // Initialize galleries
             new ComparisonGallery();
-        });
+            new FloorSlider();
+            
+            // Intersection Observer for animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
 
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target); // Animace se spustí jen jednou
-                }
+            // Observe elements
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
             });
-        }, observerOptions);
-
-        // Observe elements
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
         });
-
     </script>
 </body>
 </html>
