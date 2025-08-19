@@ -448,7 +448,7 @@
         /* Floor Gallery Slider */
         .floor-gallery {
             position: relative;
-            max-width: 1200px;
+            max-width: 900px; /* Zmenšeno pro lepší zobrazení fotek na výšku */
             margin: 0 auto;
         }
 
@@ -467,8 +467,10 @@
         .floor-slide {
             min-width: 100%;
             position: relative;
-            aspect-ratio: 16/9;
+            aspect-ratio: 4/3;
+            max-height: 600px;
             overflow: hidden;
+            background: #f3f4f6;
         }
 
         .floor-slide img {
@@ -1584,6 +1586,12 @@
                 font-size: 1.5rem;
             }
 
+            /* Mobilní poměr stran pro galerii */
+            .floor-slide {
+                aspect-ratio: 16/9;
+                max-height: none;
+            }
+
             .footer-bottom {
                 flex-direction: column;
                 gap: 1rem;
@@ -1746,49 +1754,42 @@
         </div>
     </section>
 
-    <!-- NOVÁ SEKCE: Realizace podlah -->
+    <!-- NOVÁ SEKCE: Naše realizace -->
     <section class="floor-realizations" id="floor-realizations">
         <div class="floor-container">
             <div class="floor-header fade-in">
-                <h2>Realizace podlah</h2>
+                <h2>Naše realizace</h2>
             </div>
             
             <div class="floor-gallery fade-in">
                 <div class="floor-slider-wrapper">
                     <div class="floor-slider" id="floorSlider">
                         <div class="floor-slide active">
-                            <img src="https://images.pexels.com/photos/5089180/pexels-photo-5089180.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Luxusní parkety">
-                            <div class="floor-slide-info">
-                                <h3>Luxusní dubové parkety</h3>
-                                <p>Masivní dubová podlaha s matným lakem, Praha 2</p>
-                            </div>
-                        </div>
-                        <div class="floor-slide">
-                            <img src="https://images.pexels.com/photos/6969870/pexels-photo-6969870.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Vinylová podlaha">
-                            <div class="floor-slide-info">
-                                <h3>Vinylová podlaha Click</h3>
-                                <p>Voděodolná vinylová podlaha s dekorem ořechu, Brno</p>
-                            </div>
-                        </div>
-                        <div class="floor-slide">
-                            <img src="https://images.pexels.com/photos/7534561/pexels-photo-7534561.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Renovace parket">
+                            <img src="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/5c6b9a9b-4c65-43b6-d233-57a207193400/public" alt="Renovace historických parket">
                             <div class="floor-slide-info">
                                 <h3>Renovace historických parket</h3>
-                                <p>Kompletní renovace 100 let starých parket, Praha 1</p>
+                                <p>Citlivá obnova původních parket zachovávající jejich charakter</p>
                             </div>
                         </div>
                         <div class="floor-slide">
-                            <img src="https://images.pexels.com/photos/5824901/pexels-photo-5824901.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Laminátová podlaha">
+                            <img src="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/96840340-4166-4f6c-4cbd-f7cd69036000/public" alt="Dřevěný obklad stěny">
                             <div class="floor-slide-info">
-                                <h3>Laminátová podlaha AC5</h3>
-                                <p>Vysoce odolná laminátová podlaha do kanceláří, Ostrava</p>
+                                <h3>Dřevěný obklad stěny</h3>
+                                <p>Rustikální dubový obklad s přírodními suky</p>
                             </div>
                         </div>
                         <div class="floor-slide">
-                            <img src="https://images.pexels.com/photos/3935333/pexels-photo-3935333.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Průmyslová podlaha">
+                            <img src="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/45cf3efc-0571-417e-2403-517d67841800/public" alt="Moderní schodiště">
                             <div class="floor-slide-info">
-                                <h3>Epoxidová stěrka</h3>
-                                <p>Průmyslová epoxidová podlaha do výrobní haly, Plzeň</p>
+                                <h3>Moderní schodiště</h3>
+                                <p>Samonosné schodiště s integrovaným LED osvětlením</p>
+                            </div>
+                        </div>
+                        <div class="floor-slide">
+                            <img src="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/e33092a5-4cec-4f96-2447-c07719bb5200/public" alt="Kruhová dubová podlaha">
+                            <div class="floor-slide-info">
+                                <h3>Kruhová dubová podlaha</h3>
+                                <p>Unikátní zakřivená podlaha z masivního dubu</p>
                             </div>
                         </div>
                     </div>
@@ -1805,7 +1806,6 @@
                 
                 <div class="floor-dots" id="floorDots">
                     <button class="floor-dot active"></button>
-                    <button class="floor-dot"></button>
                     <button class="floor-dot"></button>
                     <button class="floor-dot"></button>
                     <button class="floor-dot"></button>
@@ -2010,7 +2010,7 @@
     <section class="portfolio" id="portfolio">
         <div class="portfolio-wrapper">
             <div class="section-header fade-in">
-                <h2 class="section-title">Naše realizace</h2>
+                <h2 class="section-title">Realizace Fotovoltaických systémů</h2>
                 <p class="section-subtitle">Fotovoltaické systémy, které mění budoucnost</p>
             </div>
             
