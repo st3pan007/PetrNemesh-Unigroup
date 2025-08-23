@@ -272,6 +272,50 @@
             flex-wrap: wrap;
         }
 
+        /* Hero Social Icons */
+        .hero-social-wrapper {
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .hero-social-text {
+            color: white;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .hero-social {
+            display: flex;
+            gap: 1.25rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-social-link {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
+            font-size: 1.6rem;
+            transition: all 0.3s ease;
+        }
+
+        .hero-social-link:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px) scale(1.1);
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
         .btn {
             padding: 15px 35px;
             border-radius: 30px;
@@ -1385,8 +1429,8 @@
 
         .footer-social {
             display: flex;
-            gap: 1rem;
-            font-size: 1.5rem;
+            gap: 1.5rem;
+            font-size: 1.8rem;
             margin-top: 1rem;
         }
 
@@ -1568,6 +1612,16 @@
                 width: 100%;
                 text-align: center;
             }
+            
+            .hero-social-wrapper {
+                margin-top: 2rem;
+            }
+            
+            .hero-social-link {
+                width: 50px;
+                height: 50px;
+                font-size: 1.4rem;
+            }
 
             .floor-control {
                 width: 50px;
@@ -1714,6 +1768,18 @@
                     <i class="fas fa-play"></i>
                     Jak to funguje
                 </a>
+            </div>
+            
+            <div class="hero-social-wrapper">
+                <p class="hero-social-text">Nebo nás kontaktujte přímo:</p>
+                <div class="hero-social">
+                    <a href="https://wa.me/420775710770" target="_blank" rel="noopener noreferrer" class="hero-social-link" title="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="https://www.instagram.com/unigroup_s.r.o?igsh=MTR1bDJtMHI5cTZrMQ%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" class="hero-social-link" title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -2277,7 +2343,7 @@
 
             <form class="cta-form" id="contact-form" action="https://api.web3forms.com/submit" method="POST">
                 <!-- Nahraďte YOUR_ACCESS_KEY vaším klíčem z web3forms.com -->
-                <input type="hidden" name="access_key" value="77176036-08a8-4e42-882b-fa947150b92a">
+                <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY">
                 <input type="text" name="name" class="cta-input" placeholder="Vaše jméno a příjmení" required>
                 <input type="tel" name="phone" class="cta-input" placeholder="Váš telefon" required pattern="[0-9\s\+\-]+" title="Zadejte platné telefonní číslo">
                 <button type="submit" class="cta-submit">
@@ -2326,11 +2392,17 @@
             </div>
 
             <div class="footer-links">
-                <h4>Sledujte nás</h4>
+                <h4>Sociální sítě</h4>
+                <p style="color: rgba(255, 255, 255, 0.7); margin-bottom: 1rem; font-size: 0.9rem;">
+                    Sledujte naše realizace a novinky
+                </p>
                 <div class="footer-social">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://wa.me/420775710770" target="_blank" rel="noopener noreferrer" title="Napište nám na WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="https://www.instagram.com/unigroup_s.r.o?igsh=MTR1bDJtMHI5cTZrMQ%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" title="Sledujte nás na Instagramu">
+                        <i class="fab fa-instagram"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -2565,11 +2637,11 @@
                 hiddenField.value = 'Nová poptávka z webu UniGroup';
                 this.appendChild(hiddenField);
                 
-                // Přidat redirect pro Web3Forms
+                // Přidat redirect pro Web3Forms - zůstat u formuláře
                 const redirectField = document.createElement('input');
                 redirectField.type = 'hidden';
                 redirectField.name = 'redirect';
-                redirectField.value = window.location.href + '#success';
+                redirectField.value = window.location.href + '#cta';
                 this.appendChild(redirectField);
             }
         });
@@ -2579,7 +2651,7 @@
             const form = document.getElementById('contact-form');
             
             // Kontrola úspěšného odeslání Web3Forms
-            if (window.location.hash === '#success') {
+            if (window.location.hash === '#cta') {
                 const button = form.querySelector('button');
                 button.innerHTML = '<i class="fas fa-check"></i> Odesláno!';
                 button.style.background = '#28a745';
